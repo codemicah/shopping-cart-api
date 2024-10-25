@@ -18,6 +18,8 @@ Built with:
 
 # Endpoints
 
+View fully interactive API [documentation here](https://documenter.getpostman.com/view/24975827/2sAY4sj4Nt)
+
 `POST /auth/login` to log in with the demo account
 
 ```js
@@ -27,6 +29,8 @@ Built with:
 `GET /products` to get all products
 
 `GET /products/:id` to get a single product
+
+`GET /cart` to view your cart
 
 `POST /cart` to add a product to your cart
 
