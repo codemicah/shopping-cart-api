@@ -13,7 +13,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, { page, limit, total_products, products });
   } catch (error: any) {
-    return errorResponse(res, error.message, error.statusCode);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };
 
@@ -29,6 +29,6 @@ export const getProductById = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, { product });
   } catch (error: any) {
-    return errorResponse(res, error.message, error.statusCode);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };

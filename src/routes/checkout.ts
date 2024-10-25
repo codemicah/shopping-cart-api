@@ -4,6 +4,6 @@ import { auth } from "../auth/auth";
 
 const router = Router();
 
-router.post("/checkout", auth, checkout);
+router.post("/", auth, checkout);
 
 export default router;

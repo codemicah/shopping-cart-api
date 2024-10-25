@@ -17,7 +17,7 @@ export const LoginUser = async (email: string, password: string) => {
     throw new CustomError("Invalid credentials", 400);
   }
 
-  const token = sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1d" });
+  const token = sign({ _id: user._id }, JWT_SECRET, { expiresIn: "1d" });
 
   return { token, user };
 };

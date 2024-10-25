@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cartRouter from "./routes/cart";
 import productRouter from "./routes/product";
 import authRouter from "./routes/auth";
+import checkoutsRouter from "./routes/checkout";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/cart", cartRouter);
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
+app.use("/checkout", checkoutsRouter);
 
 app.get("/test", (_req: Request, res: Response) => {
   return res.sendStatus(200);

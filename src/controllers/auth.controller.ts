@@ -16,6 +16,6 @@ export const login = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, response);
   } catch (error: any) {
-    return errorResponse(res, error.message, error.statusCode);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };

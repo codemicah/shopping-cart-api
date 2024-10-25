@@ -45,7 +45,7 @@ export const AddItemToCart = async ({
     await cart.save();
     return cart;
   } catch (error: any) {
-    throw new CustomError(error.message, 500);
+    throw new CustomError(error.message, error.statusCode || 500);
   }
 };
 
@@ -61,7 +61,8 @@ export const RemoveItemFromCart = async ({
       { userId },
       {
         $pull: { items: { productId } },
-      }
+      },
+      { new: true }
     );
 
     if (!cart) {
@@ -70,6 +71,22 @@ export const RemoveItemFromCart = async ({
 
     return cart;
   } catch (error: any) {
-    throw new CustomError(error.message, 500);
+    throw new CustomError(error.message, error.statusCode || 500);
+  }
+};
+
+export const GetCart = async (userId: Types.ObjectId) => {
+  try {
+    const cart = await CartModel.findOne({ userId }).populate(
+      "items.productId"
+    );
+
+    if (!cart) {
+      throw new CustomError("Cart not found", 404);
+    }
+
+    return cart;
+  } catch (error: any) {
+    throw new CustomError(error.message, error.statusCode || 500);
   }
 };

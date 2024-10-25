@@ -10,6 +10,6 @@ export const checkout = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, result);
   } catch (error: any) {
-    return errorResponse(res, error.message, error.statusCode);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };

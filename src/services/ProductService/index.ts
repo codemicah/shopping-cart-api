@@ -24,15 +24,15 @@ export const GetAllProducts = async (
   limit: number = 10
 ) => {
   try {
-    const products = ProductModel.find(filter)
+    const products = await ProductModel.find(filter)
       .skip((page - 1) * limit)
       .limit(limit);
 
-    const total_products = ProductModel.countDocuments(filter);
+    const total_products = await ProductModel.countDocuments(filter);
 
     return { products, total_products };
   } catch (error: any) {
-    throw new CustomError(error.message, 500);
+    throw new CustomError(error.message, error.statusCode || 500);
   }
 };
 
@@ -52,7 +52,7 @@ export const GetProductById = async (productId: string) => {
 
     return productFromDB;
   } catch (error: any) {
-    throw new CustomError(error.message, 500);
+    throw new CustomError(error.message, error.statusCode || 500);
   }
 };
 
@@ -78,6 +78,6 @@ export const UpdateProduct = async (productId: string, updateData: any) => {
 
     return updatedProduct;
   } catch (error: any) {
-    throw new CustomError(error.message, 500);
+    throw new CustomError(error.message, error.statusCode || 500);
   }
 };

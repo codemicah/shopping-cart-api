@@ -70,6 +70,6 @@ export const ProcessCheckout = async (userId: string) => {
     await session.abortTransaction();
     session.endSession();
 
-    throw new CustomError(error, 500);
+    throw new CustomError(error, error.statusCode || 500);
   }
 };

@@ -4,7 +4,7 @@ export const errorResponse = (
   res: Response,
   statusCode: number = 500,
   error: any
-) => res.status(statusCode).json(error);
+) => res.status(statusCode).json({ error, code: statusCode });
 
 export const successResponse = (
   res: Response,

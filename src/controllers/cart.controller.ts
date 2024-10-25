@@ -1,18 +1,33 @@
 import { Request, Response } from "express";
 import { body } from "express-validator";
 import { errorResponse, successResponse } from "../utils/responseHandler";
-import { AddItemToCart, RemoveItemFromCart } from "../services/CartService";
+import {
+  AddItemToCart,
+  GetCart,
+  RemoveItemFromCart,
+} from "../services/CartService";
 
 export const cartValidationRules = [
   body("productId").isString().notEmpty(),
   body("quantity").isNumeric().notEmpty(),
 ];
 
+export const getCart = async (req: Request, res: Response) => {
+  try {
+    const { user } = req;
+    // Get cart
+    const cart = await GetCart(user._id);
+
+    return successResponse(res, 200, { cart });
+  } catch (error: any) {
+    return errorResponse(res, error.statusCode, error.message);
+  }
+};
+
 export const addToCart = async (req: Request, res: Response) => {
   try {
     const { user } = req;
     const { productId, quantity } = req.body;
-
     // Add product to cart
     const cart = await AddItemToCart({
       userId: user._id,
@@ -22,7 +37,7 @@ export const addToCart = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, { cart });
   } catch (error: any) {
-    return errorResponse(res, error.message, 500);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };
 
@@ -39,6 +54,6 @@ export const removeFromCart = async (req: Request, res: Response) => {
 
     return successResponse(res, 200, { cart });
   } catch (error: any) {
-    return errorResponse(res, error.message, error.statusCode);
+    return errorResponse(res, error.statusCode, error.message);
   }
 };
