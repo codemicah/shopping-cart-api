@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { errorResponse, successResponse } from "../utils/responseHandler";
 import {
   AddItemToCart,
@@ -7,10 +7,17 @@ import {
   RemoveItemFromCart,
 } from "../services/CartService";
 
-export const cartValidationRules = [
-  body("productId").isString().notEmpty(),
-  body("quantity").isNumeric().notEmpty(),
-];
+export const cartValidationRules = (action?: string) => {
+  switch (action) {
+    case "remove":
+      return [param("productId").isMongoId().withMessage("Invalid product id")];
+    default:
+      return [
+        body("productId").isMongoId().notEmpty(),
+        body("quantity").isNumeric().notEmpty(),
+      ];
+  }
+};
 
 export const getCart = async (req: Request, res: Response) => {
   try {

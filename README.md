@@ -15,3 +15,25 @@ Built with:
 2. Create a .env file using `touch .env`
 3. Copy the contents of example.env into it using `cp example.env .env`
 4. Run `yarn dev` to start the development server
+
+# Endpoints
+
+`POST /auth/login` to log in with the demo account
+
+```js
+{ email: "demo@example.com", password: "password" }
+```
+
+`GET /products` to get all products
+
+`GET /products/:id` to get a single product
+
+`POST /cart` to add a product to your cart
+
+```js
+{ productId: "product ID", quantity: 1 }
+```
+
+`DELETE /cart/:productId` to remove a product from your cart
+
+`POST /checkout` to checkout the items in your cart

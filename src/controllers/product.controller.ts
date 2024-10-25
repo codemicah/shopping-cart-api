@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { errorResponse, successResponse } from "../utils/responseHandler";
 import { GetAllProducts, GetProductById } from "../services/ProductService";
+import { param } from "express-validator";
+
+export const getProductByIdValidationRules = [
+  param("id").isMongoId().withMessage("Invalid product id"),
+];
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {

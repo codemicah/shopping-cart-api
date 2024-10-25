@@ -12,8 +12,13 @@ const router = Router();
 
 router.get("/", auth, getCart);
 
-router.post("/", auth, cartValidationRules, validateRequest, addToCart);
+router.post("/", auth, cartValidationRules(), validateRequest, addToCart);
 
-router.delete("/:productId", auth, removeFromCart);
+router.delete(
+  "/:productId",
+  auth,
+  cartValidationRules("remove"),
+  removeFromCart
+);
 
 export default router;
