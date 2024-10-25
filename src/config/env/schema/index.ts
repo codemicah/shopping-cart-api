@@ -9,5 +9,5 @@ export const schema = {
   REDIS_PASSWORD: Joi.string().required(),
   REDIS_HOST: Joi.string().required(),
   REDIS_PORT: Joi.number().required(),
-  REDIS_DB: Joi.number().required(),
+  REDIS_DB: Joi.exist(),
 };
